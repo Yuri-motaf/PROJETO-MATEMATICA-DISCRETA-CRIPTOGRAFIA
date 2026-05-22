@@ -1,0 +1,20 @@
+# Compilação
+*.o
+*.a
+*.so
+rsa_desencriptacao
+*.exe
+
+# Arquivos gerados
+mensagem_desencriptada.txt
+*.txt
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+.env
