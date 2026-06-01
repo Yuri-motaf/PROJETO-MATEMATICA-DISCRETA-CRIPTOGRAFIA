@@ -1,11 +1,21 @@
-# PROJETO-MATEMATICA-DISCRETA-CRIPTOGRAFIA
-projeto da materia de matematica discreta sobre criptografia RSA
+# Projeto criptografia RSA - Matematica discreta
+projeto da academico sobre criptografia RSA com interface web em framework django de python e logica criptografica em C. 
 
-DISCENTES: 
-    - Eduardo Emanuel - Matrícula: 2026007224
-    - Gabriel Holanda - Matrícula: 2026007242
-    - Guilherme de Santana - Matrícula: 2026007260
-    - Monique Calazans - Matrícula: 2026007313
-    - Vinicius Araujo - Matrícula: 2026007340
-    - Ricardo Oliveira - Matrícula: 2026007331
-    - Yuri Mota - Matrícula: 2026007350
+
+## Stacks 
+- Python3 + Django4
+- HTML + CSS com templates Django
+- C para encriptar, desencriptar e formar a chave publica
+- SQLite(banco padrão do Django)
+
+## Arquitetura
+
+### Frontend
+-espaço para descrever o frontend
+
+### Backend
+-espaço para descrever o backend
+
+### Camada C
+-espaço para descrever o codigo feito em C
+
