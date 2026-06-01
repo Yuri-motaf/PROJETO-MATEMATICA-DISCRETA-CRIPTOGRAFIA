@@ -18,3 +18,32 @@ mensagem_desencriptada.txt
 # Sistema
 .DS_Store
 .env
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+
+# Python bytecode and caches
+__pycache__/
+**/__pycache__/
+**/__pycache__/**
+*.py[cod]
+*$py.class
+*.pyc
+
+
+# Django / Python runtime artifacts
+*.sqlite3
+projetomd/mdproject/c_code/menu.c
+projetomd/mdproject/c_code/*.so
+projetomd/mdproject/c_code/*.dll
+projetomd/mdproject/c_code/*.dylib
+
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
