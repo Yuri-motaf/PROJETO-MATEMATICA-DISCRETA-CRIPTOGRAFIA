@@ -80,27 +80,20 @@ void gerar_chave_publica(void)
 {
     long long p, q;
 
-    printf("\n=== GERAR CHAVE PÚBLICA ===\n\n");
-
-    printf("Digite o primeiro número primo (p): ");
     scanf("%lld", &p);
     if (!verificar_primo(p))
     {
-        printf("Erro: p nao e primo!\n");
         return;
     }
 
-    printf("Digite o segundo número primo (q): ");
     scanf("%lld", &q);
     if (!verificar_primo(q))
     {
-        printf("Erro: q nao e primo!\n");
         return;
     }
 
     if (p == q)
     {
-        printf("Erro: p e q devem ser distintos!\n");
         return;
     }
 
@@ -112,13 +105,11 @@ void gerar_chave_publica(void)
 
     if (e <= 0)
     {
-        printf("Erro: e deve ser positivo!\n");
         return;
     }
 
     if (mdc(e, phi) != 1)
     {
-        printf("Erro: e nao e coprimo a phi(n)!\n");
         return;
     }
 
@@ -126,20 +117,16 @@ void gerar_chave_publica(void)
 
     if (n <= 127)
     {
-        printf("Erro: p*q deve ser maior que 127!\n");
         return;
     }
 
     FILE *arquivo = fopen("chave_publica.txt", "w");
     if (arquivo == NULL)
     {
-        printf("Erro ao criar o arquivo!\n");
         return;
     }
     fprintf(arquivo, "%lld %lld", n, e);
     fclose(arquivo);
-
-    printf("Chave publica salva em 'chave_publica.txt': n=%lld, e=%lld\n", n, e);
 }
 
 
@@ -150,58 +137,45 @@ void encriptar(void)
 {
     long long e, n;
 
-    printf("\n=== ENCRIPTAÇÃO RSA ===\n\n");
-
-    printf("Digite o expoente publico 'e': ");
     scanf("%lld", &e);
     if (e <= 0)
     {
-        printf("Erro: e deve ser positivo!\n");
         return;
     }
 
-    printf("Digite o modulo 'n': ");
     scanf("%lld", &n);
     if (n <= 127)
     {
-        printf("Erro: n deve ser maior que 127!\n");
         return;
     }
 
     FILE *arq_entrada = fopen("mensagem.txt", "r");
     if (arq_entrada == NULL)
     {
-        printf("Erro: arquivo 'mensagem.txt' nao encontrado!\n");
-        printf("Crie um arquivo 'mensagem.txt' com o texto a encriptar.\n");
         return;
     }
 
     FILE *arq_saida = fopen("mensagem_criptografada.txt", "w");
     if (arq_saida == NULL)
     {
-        printf("Erro ao criar arquivo de saida!\n");
         fclose(arq_entrada);
         return;
     }
 
     int caractere;
-    printf("\nCriptografando os caracteres:\n");
 
     while ((caractere = fgetc(arq_entrada)) != EOF)
     {
         if (caractere >= 32)
         {
-            printf("Letra: '%c' (ASCII: %d) ", caractere, caractere);
             long long numero_criptografado = calcular_exponenciacao_modular(caractere, e, n);
-            printf("-> Criptografado: %lld\n", numero_criptografado);
             fprintf(arq_saida, "%lld ", numero_criptografado);
         }
     }
 
     fclose(arq_entrada);
     fclose(arq_saida);
-    printf("\nSucesso! Mensagem salva em 'mensagem_criptografada.txt'\n");
-}
+ }
 
 
 // OPÇÃO 3 — DESENCRIPTAR MENSAGEM
@@ -211,63 +185,49 @@ void desencriptar(void)
 {
     long long p, q, e;
 
-    printf("\n=== DESENCRIPTAÇÃO RSA ===\n\n");
-
-    printf("Digite o número primo p: ");
     scanf("%lld", &p);
     if (!verificar_primo(p))
     {
-        printf("Erro: p nao e primo!\n");
         return;
     }
 
-    printf("Digite o número primo q: ");
     scanf("%lld", &q);
     if (!verificar_primo(q))
     {
-        printf("Erro: q nao e primo!\n");
         return;
     }
 
     if (p == q)
     {
-        printf("Erro: p e q devem ser distintos!\n");
         return;
     }
 
     if (p * q <= 127)
     {
-        printf("Erro: p*q deve ser maior que 127!\n");
         return;
     }
 
-    printf("Digite o expoente e: ");
     scanf("%lld", &e);
     if (e <= 0)
     {
-        printf("Erro: e deve ser positivo!\n");
         return;
     }
 
     long long phi = (p - 1) * (q - 1);
     if (mdc(e, phi) != 1)
     {
-        printf("Erro: e nao e relativamente primo a phi(n)!\n");
         return;
     }
 
     long long n = p * q;
     long long d = calcular_inverso_modular(e, phi);
-    printf("Chave privada d calculada: %lld\n", d);
 
     char nome_arquivo[100];
-    printf("Digite o nome do arquivo com a mensagem encriptada: ");
     scanf("%99s", nome_arquivo);
 
     FILE *arquivo = fopen(nome_arquivo, "r");
     if (arquivo == NULL)
     {
-        printf("Erro ao abrir o arquivo!\n");
         return;
     }
 
@@ -275,7 +235,6 @@ void desencriptar(void)
     char *mensagem_decriptada = (char *)malloc(capacidade * sizeof(char));
     if (mensagem_decriptada == NULL)
     {
-        printf("Erro: falha ao alocar memoria!\n");
         fclose(arquivo);
         return;
     }
@@ -291,7 +250,6 @@ void desencriptar(void)
             char *temp = (char *)realloc(mensagem_decriptada, capacidade * sizeof(char));
             if (temp == NULL)
             {
-                printf("Erro: falha ao realocar memoria!\n");
                 free(mensagem_decriptada);
                 fclose(arquivo);
                 return;
@@ -306,14 +264,11 @@ void desencriptar(void)
     mensagem_decriptada[index] = '\0';
     fclose(arquivo);
 
-    printf("\nMensagem desencriptada:\n%s\n", mensagem_decriptada);
-
     FILE *arquivo_saida = fopen("mensagem_desencriptada.txt", "w");
     if (arquivo_saida != NULL)
     {
         fprintf(arquivo_saida, "%s", mensagem_decriptada);
         fclose(arquivo_saida);
-        printf("\nA mensagem tambem foi salva em 'mensagem_desencriptada.txt'\n");
     }
 
     free(mensagem_decriptada);
@@ -329,14 +284,6 @@ int main(void)
 
     do
     {
-        printf("\n=============================\n");
-        printf("        RSA - MENU\n");
-        printf("=============================\n");
-        printf("1. Gerar e salvar chave publica\n");
-        printf("2. Encriptar mensagem\n");
-        printf("3. Desencriptar mensagem\n");
-        printf("0. Sair\n");
-        printf("Escolha uma opcao: ");
         if (scanf("%d", &opcao) != 1)
         {
             opcao = -1;
@@ -350,10 +297,7 @@ int main(void)
         else if (opcao == 3)
             desencriptar();
         else if (opcao != 0)
-            printf("Opcao invalida!\n");
-
     } while (opcao != 0);
 
-    printf("Encerrando...\n");
     return 0;
 }
