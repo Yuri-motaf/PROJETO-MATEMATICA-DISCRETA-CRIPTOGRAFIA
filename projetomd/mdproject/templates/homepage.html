@@ -3,10 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>meu primeiro site</title>
-    <link rel="stylesheet" href="static/homepage.css">
+    <title>FRONTEND CRIPTOGRAFIA</title>
+    <link rel="stylesheet" href="../static/homepage.css">
 </head>
 <body>
     
+    <div class="content">
+        <h1>PROJETO DE CRIPTOGRAFIA RSA</h1>
+        <h3>Aplicação de conceitos na criptografia RSA</h3>
+    </div>
+
+    <div class="RSA">
+        <a href="encriptar.html" class="butao-link">encriptar</a>
+        <a href="desencriptar.html" class="butao-link">desencriptar</a>
+        <a href="chavepublica.html" class="butao-link">chave publica</a>
+    </div> 
+
+    <script>
+        document.querySelectorAll('.butao-link').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                var dest = this.href;
+                var all  = document.querySelectorAll('.butao-link');
+ 
+                all.forEach(function(b) {
+                    if (b !== btn) b.classList.add('hide');
+                });
+                btn.classList.add('go-right');
+ 
+                setTimeout(function() { window.location.href = dest; }, 600);
+            });
+        });
+    </script>
+
 </body>
 </html>

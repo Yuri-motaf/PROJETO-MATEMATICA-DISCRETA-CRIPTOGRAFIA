@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>desencriptar</title>
+    <link rel="stylesheet" href="../static/desencriptar.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Desencriptar</h1>
+    </div>
+    <br>
+    <br>
+    <div class="dec" id="decCard">
+        <h2>Digite o primo original P:</h2>
+        <input type="number" placeholder="Digite P" id="dec_p" name="ciphertext" rows="4" cols="50"><br>
+        <h2>Digite o primo original Q:</h2>
+        <input type="number" placeholder="Digite Q" id="dec_q" name="ciphertext" rows="4" cols="50"><br>
+        <h2>Digite o expoente original E: </h2>
+        <input type="number" placeholder="Digite E" id="dec_e" name="ciphertext" rows="4" cols="50"><br>
+
+        <input type="submit" value="Desencriptar">
+        <p class="erro" id="dec-erro"></p>
+
+        <div class="resultado" id="dec-resultado">
+            <div class="resultado-box">
+                <div class="label">Mensagem decriptada:</div>
+                <div class="chave-valor" id="dec-val"></div>
+                <a class="botao_volta" href="/homepage.html">&#8592; Voltar à homepage</a>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
