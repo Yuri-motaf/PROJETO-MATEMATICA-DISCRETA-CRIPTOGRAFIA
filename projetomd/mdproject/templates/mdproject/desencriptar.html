@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>desencriptar</title>
+    <title>Desencriptar</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'desencriptar.css' %}">
 </head>
@@ -11,13 +11,11 @@
     <div class="header">
         <h1>Desencriptar</h1>
     </div>
-    <br>
-    <br>
+    <br><br>
 
     <div class="dec {% if resultado %}expanded{% endif %}" id="decCard">
         <form method="POST" action="{% url 'descrypt' %}">
             {% csrf_token %}
-
             <h2>Digite o primo original P:</h2>
             <input type="number" placeholder="Digite P" name="dec_p" required>
             <br>
@@ -35,7 +33,7 @@
         {% endif %}
 
         {% if resultado %}
-        <div class="resultado visivel" id="dec-resultado">
+        <div class="resultado visivel">
             <div class="resultado-box">
                 <div class="label">Mensagem desencriptada:</div>
                 <div class="chave-valor">{{ resultado }}</div>
@@ -46,12 +44,11 @@
         <div class="resultado" id="dec-resultado">
             <div class="resultado-box">
                 <div class="label">Mensagem desencriptada:</div>
-                <div class="chave-valor" id="dec-val"></div>
+                <div class="chave-valor"></div>
                 <a class="botao_volta" href="{% url 'index' %}">⬅ Voltar à página inicial</a>
             </div>
         </div>
         {% endif %}
     </div>
-
 </body>
 </html>

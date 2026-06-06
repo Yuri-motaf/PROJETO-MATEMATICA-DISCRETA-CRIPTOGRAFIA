@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chave Pública</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'chavepublica.css' %}"></head>
+    <link rel="stylesheet" href="{% static 'chavepublica.css' %}">
+</head>
 <body>
     <div class="header">
         <h1>Chave Pública</h1>
     </div>
-    <br>
-    <br>
+    <br><br>
 
     <div class="chave {% if resultado %}expanded{% endif %}" id="chaveCard">
         <form method="POST" action="{% url 'save' %}">
             {% csrf_token %}
-
             <h2>Digite primo P</h2>
             <input type="number" placeholder="Número primo p" name="p" required>
             <br>
@@ -34,7 +33,7 @@
         {% endif %}
 
         {% if resultado %}
-        <div class="resultado visivel" id="resultado">
+        <div class="resultado visivel">
             <div class="resultado-box">
                 <div class="label">Chave pública gerada (n e):</div>
                 <div class="chave-valor">{{ resultado }}</div>
@@ -45,12 +44,11 @@
         <div class="resultado" id="resultado">
             <div class="resultado-box">
                 <div class="label">Chave pública gerada:</div>
-                <div class="chave-valor" id="chaveValor"></div>
+                <div class="chave-valor"></div>
                 <a class="botao_volta" href="{% url 'index' %}">⬅ Voltar à página inicial</a>
             </div>
         </div>
         {% endif %}
     </div>
-
 </body>
 </html>
