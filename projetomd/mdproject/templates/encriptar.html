@@ -4,31 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encriptar</title>
-    <link rel="stylesheet" href="../static/encriptar.css">
-</head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'encriptar.css' %}"></head>
 <body>
     <div class="header">
         <h1>Encriptar</h1>
     </div>
-
     <br>
     <br>
-    <div class="enc" id="encCard">
-        <h2>Mensagem:</h2>
-        <input type="text" placeholder="Digite sua mensagem" id="plaintext" name="plaintext" rows="4" cols="50"><br>
-        <h2>Chave pública E:</h2>
-        <input type="number" placeholder="Digite a chave pública E" id="public_key_e" name="public_key_e" rows="4" cols="50"><br>
-        <h2>Chave pública N:</h2>
-        <input type="number" placeholder="Digite a chave pública N" id="public_key_n" name="public_key_n" rows="4" cols="50"><br>
-        <input type="submit" value="Encriptar">
 
+    <div class="enc {% if resultado %}expanded{% endif %}" id="encCard">
+        <form method="POST" action="{% url 'crypt' %}">
+            {% csrf_token %}
+
+            <h2>Mensagem:</h2>
+            <input type="text" placeholder="Digite sua mensagem" name="plaintext" required>
+            <br>
+            <h2>Chave pública E:</h2>
+            <input type="number" placeholder="Digite a chave pública E" name="public_key_e" required>
+            <br>
+            <h2>Chave pública N:</h2>
+            <input type="number" placeholder="Digite a chave pública N" name="public_key_n" required>
+            <br>
+            <input type="submit" value="Encriptar">
+        </form>
+
+        {% if erro %}
+            <p class="erro">{{ erro }}</p>
+        {% endif %}
+
+        {% if resultado %}
+        <div class="resultado visivel" id="enc-resultado">
+            <div class="resultado-box">
+                <div class="label">Mensagem encriptada:</div>
+                <div class="chave-valor">{{ resultado }}</div>
+                <a class="botao_volta" href="{% url 'index' %}">⬅ Voltar à página inicial</a>
+            </div>
+        </div>
+        {% else %}
         <div class="resultado" id="enc-resultado">
             <div class="resultado-box">
                 <div class="label">Mensagem encriptada:</div>
                 <div class="chave-valor" id="enc-val"></div>
-                <a class="botao_volta" href="/homepage.html"> Voltar à pagina inicial</a>
+                <a class="botao_volta" href="{% url 'index' %}">⬅ Voltar à página inicial</a>
             </div>
         </div>
+        {% endif %}
     </div>
+
 </body>
 </html>

@@ -4,41 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chave Pública</title>
-    <link rel="stylesheet" href="../static/chavepublica.css">
-</head>
-<script>
-    
-
-</script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'chavepublica.css' %}"></head>
 <body>
     <div class="header">
         <h1>Chave Pública</h1>
     </div>
     <br>
     <br>
-    <div class="chave" id="chaveCard">
-        <h2>Digite primo P</h2>
-        <input type="number" placeholder="Número primo p" id="p" name="p" required>
-        <br>
-        <h2>Digite primo Q</h2>
-        <input type="number" placeholder="Número primo q" id="q" name="q" required>
-        <br>
-        <h2>Digite expoente E</h2>
-        <input type="number" placeholder="coprimo com φ(n)" id="e" name="e" required>
-        <br>
-        <input type="submit" value="Gerar Chave Pública">
-        <p class="erro" id="erro"></p>
-        
+
+    <div class="chave {% if resultado %}expanded{% endif %}" id="chaveCard">
+        <form method="POST" action="{% url 'save' %}">
+            {% csrf_token %}
+
+            <h2>Digite primo P</h2>
+            <input type="number" placeholder="Número primo p" name="p" required>
+            <br>
+            <h2>Digite primo Q</h2>
+            <input type="number" placeholder="Número primo q" name="q" required>
+            <br>
+            <h2>Digite expoente E</h2>
+            <input type="number" placeholder="coprimo com φ(n)" name="e" required>
+            <br>
+            <input type="submit" value="Gerar Chave Pública">
+        </form>
+
+        {% if erro %}
+            <p class="erro">{{ erro }}</p>
+        {% endif %}
+
+        {% if resultado %}
+        <div class="resultado visivel" id="resultado">
+            <div class="resultado-box">
+                <div class="label">Chave pública gerada (n e):</div>
+                <div class="chave-valor">{{ resultado }}</div>
+                <a class="botao_volta" href="{% url 'index' %}">⬅ Voltar à página inicial</a>
+            </div>
+        </div>
+        {% else %}
         <div class="resultado" id="resultado">
             <div class="resultado-box">
                 <div class="label">Chave pública gerada:</div>
                 <div class="chave-valor" id="chaveValor"></div>
-                <a class="botao_volta" href="/homepage.html">⬅ Voltar à pagina inicial</a>
+                <a class="botao_volta" href="{% url 'index' %}">⬅ Voltar à página inicial</a>
             </div>
         </div>
+        {% endif %}
     </div>
-
-
 
 </body>
 </html>

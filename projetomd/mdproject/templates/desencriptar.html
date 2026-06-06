@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>desencriptar</title>
-    <link rel="stylesheet" href="../static/desencriptar.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'desencriptar.css' %}">
 </head>
 <body>
     <div class="header">
@@ -12,25 +13,45 @@
     </div>
     <br>
     <br>
-    <div class="dec" id="decCard">
-        <h2>Digite o primo original P:</h2>
-        <input type="number" placeholder="Digite P" id="dec_p" name="ciphertext" rows="4" cols="50"><br>
-        <h2>Digite o primo original Q:</h2>
-        <input type="number" placeholder="Digite Q" id="dec_q" name="ciphertext" rows="4" cols="50"><br>
-        <h2>Digite o expoente original E: </h2>
-        <input type="number" placeholder="Digite E" id="dec_e" name="ciphertext" rows="4" cols="50"><br>
 
-        <input type="submit" value="Desencriptar">
-        <p class="erro" id="dec-erro"></p>
+    <div class="dec {% if resultado %}expanded{% endif %}" id="decCard">
+        <form method="POST" action="{% url 'descrypt' %}">
+            {% csrf_token %}
 
-        <div class="resultado" id="dec-resultado">
+            <h2>Digite o primo original P:</h2>
+            <input type="number" placeholder="Digite P" name="dec_p" required>
+            <br>
+            <h2>Digite o primo original Q:</h2>
+            <input type="number" placeholder="Digite Q" name="dec_q" required>
+            <br>
+            <h2>Digite o expoente original E:</h2>
+            <input type="number" placeholder="Digite E" name="dec_e" required>
+            <br>
+            <input type="submit" value="Desencriptar">
+        </form>
+
+        {% if erro %}
+            <p class="erro">{{ erro }}</p>
+        {% endif %}
+
+        {% if resultado %}
+        <div class="resultado visivel" id="dec-resultado">
             <div class="resultado-box">
-                <div class="label">Mensagem decriptada:</div>
-                <div class="chave-valor" id="dec-val"></div>
-                <a class="botao_volta" href="/homepage.html">&#8592; Voltar à homepage</a>
+                <div class="label">Mensagem desencriptada:</div>
+                <div class="chave-valor">{{ resultado }}</div>
+                <a class="botao_volta" href="{% url 'index' %}">⬅ Voltar à página inicial</a>
             </div>
         </div>
-        
+        {% else %}
+        <div class="resultado" id="dec-resultado">
+            <div class="resultado-box">
+                <div class="label">Mensagem desencriptada:</div>
+                <div class="chave-valor" id="dec-val"></div>
+                <a class="botao_volta" href="{% url 'index' %}">⬅ Voltar à página inicial</a>
+            </div>
+        </div>
+        {% endif %}
     </div>
+
 </body>
 </html>

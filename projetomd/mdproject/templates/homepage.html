@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRONTEND CRIPTOGRAFIA</title>
-    <link rel="stylesheet" href="../static/homepage.css">
+    <title>CRIPTOGRAFIA</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
 </head>
 <body>
     
@@ -14,10 +15,10 @@
     </div>
 
     <div class="RSA">
-        <a href="encriptar.html" class="butao-link">encriptar</a>
-        <a href="desencriptar.html" class="butao-link">desencriptar</a>
-        <a href="chavepublica.html" class="butao-link">chave publica</a>
-    </div> 
+        <a href="{% url 'crypt' %}" class="butao-link">encriptar</a>
+        <a href="{% url 'descrypt' %}" class="butao-link">desencriptar</a>
+        <a href="{% url 'save' %}" class="butao-link">chave pública</a>
+    </div>
 
     <script>
         document.querySelectorAll('.butao-link').forEach(function(btn) {
