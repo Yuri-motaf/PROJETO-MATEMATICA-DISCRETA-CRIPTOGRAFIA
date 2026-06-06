@@ -4,10 +4,15 @@
 *.so
 rsa_desencriptacao
 *.exe
+*.dll
+*.out
 
 # Arquivos gerados
 mensagem_desencriptada.txt
 *.txt
+chave_publica.txt
+mensagem_criptografada.txt
+
 
 # IDEs
 .vscode/
@@ -47,3 +52,7 @@ projetomd/mdproject/c_code/*.dylib
 .DS_Store
 Thumbs.db
 .vscode/
+
+#Variáveis de ambiente
+.env
+!.env.example
