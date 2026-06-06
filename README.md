@@ -57,6 +57,7 @@ pip install -r requirements.txt
 ## Compilar a biblioteca C
 
 ```bash
+cd PROJETO-MATEMATICA-DISCRETA-CRIPTOGRAFIA
 cd projetomd/mdproject/codigoC
 gcc -shared -fPIC -o menu.so menu.c
 cd ../../..
