@@ -1,0 +1,5 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "gcc -shared -fPIC -o projetomd/mdproject/codigoC/menu.so projetomd/mdproject/codigoC/menu.c && python projetomd/manage.py runserver 0.0.0.0:$PORT"
